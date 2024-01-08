@@ -34,6 +34,7 @@ jobs:
         run: |
           git mv Unity/Assets/* .
           git rm -rf Unity
+          rm -rf Unity
           git rm -f Readme.md
           git rm -f Readme.md.meta
           git mv Samples Samples~
