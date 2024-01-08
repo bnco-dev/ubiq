@@ -35,6 +35,7 @@ jobs:
           echo '8'
           git mv ${{ inputs.project-folder }}/Assets/* .
           echo '9'
+          ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//  /g' -e 's/^/   /'
           git rm -rf ${{ inputs.project-folder }}
           echo '10'
           rm -rf ${{ inputs.project-folder }}
