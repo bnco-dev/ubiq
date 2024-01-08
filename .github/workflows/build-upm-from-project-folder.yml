@@ -18,28 +18,15 @@ jobs:
       - name: Remove everything except for our project
         run: |
           git rm -rf .
-          echo '1'
           git checkout HEAD -- ${{ inputs.project-folder }}/Assets/Editor
-          echo '2'
           git checkout HEAD -- ${{ inputs.project-folder }}/Assets/Editor.meta
-          echo '3'
           git checkout HEAD -- ${{ inputs.project-folder }}/Assets/Runtime
-          echo '4'
           git checkout HEAD -- ${{ inputs.project-folder }}/Assets/Runtime.meta
-          echo '5'
           git checkout HEAD -- ${{ inputs.project-folder }}/Assets/package.json
-          echo '6'
           git checkout HEAD -- ${{ inputs.project-folder }}/Assets/package.json.meta
-          echo '7'
           git checkout HEAD -- ${{ inputs.project-folder }}/Assets/Samples
-          echo '8'
           git mv ${{ inputs.project-folder }}/Assets/* .
-          echo '9'
-          ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//  /g' -e 's/^/   /'
-          git rm -rf ${{ inputs.project-folder }}
-          echo '10'
           rm -rf ${{ inputs.project-folder }}
-          echo '11'
       - name: Fetch branch
         run: git fetch origin ${{ inputs.upm-branch }}:${{ inputs.upm-branch }} || true
       - name: Create upm branch if it does not yet exist
