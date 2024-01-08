@@ -30,19 +30,18 @@ jobs:
           git checkout --detach
           git reset --soft ${{ github.ref }}
           git checkout ${{ github.ref }}
-          git checkout HEAD -- ${{ inputs.project-folder }}
+          git checkout HEAD -- ${{ inputs.project-folder }}/Assets/Editor
+          git checkout HEAD -- ${{ inputs.project-folder }}/Assets/Editor.meta
+          git checkout HEAD -- ${{ inputs.project-folder }}/Assets/Runtime
+          git checkout HEAD -- ${{ inputs.project-folder }}/Assets/Runtime.meta
+          git checkout HEAD -- ${{ inputs.project-folder }}/Assets/Samples
           git checkout --detach
           git reset --soft ${{ inputs.upm-branch }}
           git checkout ${{ inputs.upm-branch }}
-      - name: Create UPM package for our project
-        run: |
           git mv ${{ inputs.project-folder }}/Assets/* .
           git rm -rf ${{ inputs.project-folder }}
           rm -rf ${{ inputs.project-folder }}
-          git rm -f Readme.md
-          git rm -f Readme.md.meta
           git mv Samples Samples~
-          git rm -f Samples.meta
           ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//  /g' -e 's/^/   /'
       - name: Config user name
         run: git config --global user.name "github-actions[bot]"
