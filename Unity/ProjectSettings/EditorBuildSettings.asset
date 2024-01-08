@@ -5,17 +5,17 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Samples/Start Here.unity
     guid: 2de505d34345ab340bdde30d419b24eb
   - enabled: 0
-    path: Assets/Samples/MinimalExamples/Spawning/Hello World Spawner.unity
+    path: Assets/Samples/00_Spawning.unity
     guid: 9a73397ffd9ce474598cdea3025280ac
   - enabled: 0
-    path: Assets/Samples/MinimalExamples/Questionnaire/Questionnaire.unity
+    path: Assets/Samples/12_Questionnaire.unity
     guid: 9433118128ab9f84a80f4175b0e14612
   m_configObjects:
-    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 94853b5e64b20ad4ea201d84aa95b8d9,
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 624b316f1a508554c9c7e5739fb48d86,
       type: 2}
     Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: 5a1428b16d224ac44a5b5cfc7281928e,
       type: 2}
