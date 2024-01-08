@@ -24,8 +24,8 @@ jobs:
         run: |
           git rm -rf .
           git checkout --detach
-          git reset --soft master
-          git checkout master
+          git reset --soft ${{ github.ref }}
+          git checkout ${{ github.ref }}
           git checkout HEAD -- Unity
           git checkout --detach
           git reset --soft upm
