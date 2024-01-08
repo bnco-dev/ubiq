@@ -162,17 +162,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.valvesoftware.unity.openvr": {
-      "version": "3.0.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.xr.management": "3.2.13",
-        "com.unity.ugui": "1.0.0",
-        "com.unity.xr.legacyinputhelpers": "1.0.0"
-      },
-      "url": "https://registry.npmjs.org"
-    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,

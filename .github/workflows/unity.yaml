@@ -1,7 +1,7 @@
 name: Update upm branch on release
 on:
-  release:
-    types: [published]
+  push:
+    tags: [ 'ubiq-v*.*.*' ]
 jobs:
   build:
     name: Build and commit to upm branch
