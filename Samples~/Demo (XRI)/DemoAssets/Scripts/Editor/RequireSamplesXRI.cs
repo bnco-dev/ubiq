@@ -9,6 +9,7 @@ namespace Ubiq.Samples.Demo.Editor
     internal static class RequireSamplesXRIUtil
     {
         public const string DEMO_SCENE_GUID = "2de505d34345ab340bdde30d419b24eb";
+        public const string LOOPBACK_SCENE_GUID = "44835542044d9c1469efdf6740cdc7ba";
         public const string XRI_SAMPLE_PLAYER_GUID = "f6336ac4ac8b4d34bc5072418cdc62a0";
         public const string XRI_SAMPLE_SIMULATOR_GUID = "18ddb545287c546e19cc77dc9fbb2189";
 
@@ -16,6 +17,11 @@ namespace Ubiq.Samples.Demo.Editor
         {
             return AssetExistsFromGUID(RequireSamplesXRIUtil.XRI_SAMPLE_PLAYER_GUID)
                 && AssetExistsFromGUID(RequireSamplesXRIUtil.XRI_SAMPLE_SIMULATOR_GUID);
+        }
+
+        public static bool IsUbiqSampleScene(string guid)
+        {
+            return guid == DEMO_SCENE_GUID || guid == LOOPBACK_SCENE_GUID;
         }
 
         public static bool AssetExistsFromGUID(string guid)
@@ -67,7 +73,7 @@ namespace Ubiq.Samples.Demo.Editor
         {
             // Check if the scene we're opening is the demo scene
             var openedSceneGuid = AssetDatabase.AssetPathToGUID(scene.path);
-            if (openedSceneGuid != RequireSamplesXRIUtil.DEMO_SCENE_GUID)
+            if (!RequireSamplesXRIUtil.IsUbiqSampleScene(openedSceneGuid))
             {
                 return;
             }
