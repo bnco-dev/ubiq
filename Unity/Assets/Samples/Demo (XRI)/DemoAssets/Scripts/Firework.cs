@@ -1,9 +1,9 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using Ubiq.Messaging;
 using Ubiq.Spawning;
-using Ubiq.XR;
-using UnityEngine;
+using Ubiq.Geometry;
 #if XRI_2_4_3_OR_NEWER
 using UnityEngine.XR.Interaction.Toolkit;
 #endif
@@ -42,6 +42,8 @@ namespace Ubiq.Samples
         public void XRGrabInteractable_Activated(ActivateEventArgs eventArgs)
         {
             fired = true;
+
+            // Force the interactor(hand) to drop the firework
             var interactor = (XRBaseInteractor)eventArgs.interactorObject;
             interactor.allowSelect = false;
             var interactable = (XRGrabInteractable)eventArgs.interactableObject;
@@ -49,23 +51,11 @@ namespace Ubiq.Samples
             interactor.allowSelect = true;
         }
 
-        public struct Message
-        {
-            public TransformMessage transform;
-            public bool fired;
-
-            public Message(Transform transform, bool fired)
-            {
-                this.transform = new TransformMessage(transform);
-                this.fired = fired;
-            }
-        }
-
         private void Update()
         {
             if(owner)
             {
-                context.SendJson(new Message(transform, fired));
+                SendMessage();
             }
             if(owner && fired)
             {
@@ -87,11 +77,26 @@ namespace Ubiq.Samples
             }
         }
 
+        public struct Message
+        {
+            public PositionRotation pose;
+            public bool fired;
+        }
+
+        private void SendMessage()
+        {
+            var message = new Message();
+            message.pose = Transforms.ToLocal(transform,context.Scene.transform);
+            message.fired = fired;
+            context.SendJson(message);
+        }
+
         public void ProcessMessage(ReferenceCountedSceneGraphMessage message)
         {
             var msg = message.FromJson<Message>();
-            transform.localPosition = msg.transform.position; // The Message constructor will take the *local* properties of the passed transform.
-            transform.localRotation = msg.transform.rotation;
+            var pose = Transforms.ToWorld(msg.pose,context.Scene.transform);
+            transform.position = pose.position;
+            transform.rotation = pose.rotation;
             fired = msg.fired;
         }
 

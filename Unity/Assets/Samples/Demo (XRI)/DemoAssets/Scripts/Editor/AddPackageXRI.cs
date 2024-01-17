@@ -2,12 +2,15 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.PackageManager;
+using UnityEditor.PackageManager.Requests;
 
 namespace Ubiq.Samples.Demo.Editor
 {
     [InitializeOnLoad]
     public class AddPackageXRI
     {
+        AddRequest request;
+
         static AddPackageXRI()
         {
 #if XRI_0_0_0_OR_NEWER
@@ -20,10 +23,25 @@ namespace Ubiq.Samples.Demo.Editor
                 " symbols");
     #endif
 #else
-            Client.Add("com.unity.xr.interaction.toolkit");
-            Debug.Log("Ubiq added XRI to project requirements");
-            AssetDatabase.Refresh();
+            Debug.Log("Ubiq attempting to add XRI to project requirements...");
+            var instance = new AddPackageXRI();
+            instance.request = Client.Add("com.unity.xr.interaction.toolkit");
+            EditorApplication.update += instance.Update;
 #endif
+        }
+
+        void Update()
+        {
+            if (request == null || request.Status == StatusCode.Failure)
+            {
+                EditorApplication.update -= Update;
+            }
+
+            if (request.Status == StatusCode.Success)
+            {
+                Debug.Log("Ubiq added XRI to project requirements");
+                AssetDatabase.Refresh();
+            }
         }
     }
 }

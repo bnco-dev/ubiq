@@ -21,15 +21,25 @@ namespace Ubiq.Samples
         public GameObject fireworkPrefab;
 
 #if XRI_2_4_3_OR_NEWER
+        private NetworkSpawnManager spawnManager;
+        private XRGrabInteractable interactable;
+
         private void Start()
         {
-            var grab = GetComponent<XRGrabInteractable>();
-            grab.activated.AddListener(XRGrabInteractable_Activated);
+            spawnManager = NetworkSpawnManager.Find(this);
+            interactable = GetComponent<XRGrabInteractable>();
+
+            interactable.activated.AddListener(XRGrabInteractable_Activated);
+        }
+
+        private void OnDestroy()
+        {
+            interactable.activated.RemoveListener(XRGrabInteractable_Activated);
         }
 
         public void XRGrabInteractable_Activated(ActivateEventArgs eventArgs)
         {
-            var go = NetworkSpawnManager.Find(this).SpawnWithPeerScope(fireworkPrefab);
+            var go = spawnManager.SpawnWithPeerScope(fireworkPrefab);
             var firework = go.GetComponent<Firework>();
             firework.transform.position = transform.position;
             firework.owner = true;
