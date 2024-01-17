@@ -16,12 +16,12 @@
     "samples": [
         {
           "displayName": "Examples",
-          "description": "Minimal examples of Ubiq in action",
+          "description": "Small examples of Ubiq in action. Demonstrates basic features in isolation.",
           "path": "Samples~/Examples"
         },
         {
           "displayName": "Demo (XRI)",
-          "description": "A fully-featured demo",
+          "description": "A fully-featured social demo with XR. NOTE: Will add the XR Interaction Toolkit package as a project dependency.",
           "path": "Samples~/Demo (XRI)"
         }
     ]
