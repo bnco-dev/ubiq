@@ -23,7 +23,7 @@ namespace Ubiq.Samples.Demo.Editor
                 " symbols");
     #endif
 #else
-            Debug.Log("Ubiq attempting to add XRI to project requirements...");
+            Debug.Log("Ubiq attempting to add XRI to project requirements. Please wait...");
             var instance = new AddPackageXRI();
             instance.request = Client.Add("com.unity.xr.interaction.toolkit");
             EditorApplication.update += instance.Update;
@@ -39,7 +39,7 @@ namespace Ubiq.Samples.Demo.Editor
 
             if (request.Status == StatusCode.Success)
             {
-                Debug.Log("Ubiq added XRI to project requirements");
+                Debug.Log("Ubiq added XRI to project requirements. You may be prompted to restart to enable Input backends.");
                 AssetDatabase.Refresh();
             }
         }
