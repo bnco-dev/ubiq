@@ -1,1 +1,0 @@
-Documentation: https://ucl-vr.github.io/ubiq/
