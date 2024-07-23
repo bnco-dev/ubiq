@@ -1,6 +1,6 @@
 This sample contains compatibility tools for Ready Player Me avatars in Ubiq. Currently support is only good for `HalfBody` avatars.
 
-![rpm-avatar](https://github.com/UCL-VR/ubiq-avatars-readyplayerme/assets/33021110/f25c7f6f-7b65-49d6-a964-eb3a8e00837a)
+![rpm-avatar](https://github.com/UCL-VR/ubiq/assets/33021110/b2633d5c-8b08-4041-9704-a7a053ef9b59)
 
 ## What's Included
 
@@ -25,9 +25,8 @@ Avatar loading is done at runtime by the `UbiqReadyPlayerMeAvatarLoader` script 
 
 ## Help! I'm seeing error CS0234
 
-This version of the ReadyPlayerMe package manages its dependencies in code. If there are compilation errors at the time it is imported, it'll never run this import code and won't correctly install its dependencies. Here's the fix:
+The ReadyPlayerMe packages used in this sample depend on one another. If something goes wrong during installation, one or more of these dependencies might be missing. The ReadyPlayerMe packages do not use preprocessor guards to prevent compilation in this case, so missing packages cause compilation errors. Your project then gets stuck in a state where dependencies are needed but the code which would import them cannot be compiled. Here's the fix:
 
-1. Delete this sample from your project folder
-2. In the package manager, remove the `Ready Player Me Core` package
-3. Ensure you have no compilation errors in your project
-4. Import this sample again
+1. In the package manager, remove the `Ready Player Me Core (Ubiq Fork)` package and the `Ready Player Me Avatar Loader` package
+2. Ensure you have no other compilation errors in your project
+3. When your project is compiling without errors, the missing packages will be detected and re-imported
