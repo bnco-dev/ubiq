@@ -4,17 +4,17 @@ namespace Ubiq.Editor.XRI
     {
         public static void Import()
         {
-#if XRI_3_0_0_OR_NEWER && !UBIQ_SILENCEWARNING_XRIVERSION
+#if (XRI_3_1_0_OR_NEWER || (!XRI_3_0_7_OR_NEWER && XRI_0_0_0_OR_NEWER)) && !UBIQ_SILENCEWARNING_XRIVERSION
             UnityEngine.Debug.LogWarning(
-                "Ubiq samples require XRI = 2.[5+].X, but a" +
+                "Ubiq samples require XRI = 3.0.[7+], but a" +
                 " different version is installed. The sample may not work" +
                 " correctly. To silence this warning, add the string" +
                 " UBIQ_SILENCEWARNING_XRIVERSION to your scripting define" +
                 " symbols");
 #endif
-#if XRHANDS_1_5_0_OR_NEWER && !UBIQ_SILENCEWARNING_XRHANDSVERSION
+#if (XRHANDS_1_6_0_OR_NEWER || (!XRHANDS_1_5_0_OR_NEWER && XRHANDS_0_0_0_OR_NEWER)) && !UBIQ_SILENCEWARNING_XRHANDSVERSION
             UnityEngine.Debug.LogWarning(
-                "Ubiq samples require XRHands = 1.4.[1+], but a" +
+                "Ubiq samples require XRHands = 1.5.[0+], but a" +
                 " different version is installed. The sample may not work" +
                 " correctly. To silence this warning, add the string" +
                 " UBIQ_SILENCEWARNING_XRHANDSVERSION to your scripting define" +
@@ -22,10 +22,10 @@ namespace Ubiq.Editor.XRI
 #endif
 
 #if !XRI_0_0_0_OR_NEWER
-            PackageManagerHelper.AddPackage("com.unity.xr.interaction.toolkit@2.5.2");
+            PackageManagerHelper.AddPackage("com.unity.xr.interaction.toolkit@3.0.7");
 #endif
 #if !XRHANDS_0_0_0_OR_NEWER
-            PackageManagerHelper.AddPackage("com.unity.xr.hands@1.3.0");
+            PackageManagerHelper.AddPackage("com.unity.xr.hands@1.5.0");
 #endif
             
 #if XRI_0_0_0_OR_NEWER
